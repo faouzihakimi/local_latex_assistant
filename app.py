@@ -22,7 +22,7 @@ st.set_page_config(
 )
 
 st.title("📚 Latex Writing Assistant")
-st.caption("Powered by Ollama (Gemma3:1b)")
+st.caption("Powered by Ollama (gemma3:270m)")
 
 tab1, tab2, tab3 = st.tabs(["BibTeX", "Text Improvement", "Markdown→LaTeX"])
 
