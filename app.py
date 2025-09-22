@@ -8,10 +8,10 @@ from utils.bibtex_converter import *
 from utils.md_latex_converter import *
 from utils.text_improver import *
 
-
-# Initialize session state variables
+used_model = 'gemma3:1b'
+#Initialize session state variables
 if "ollama_initialized" not in st.session_state:
-    ollama.pull('gemma3:1b')  
+    ollama.pull(used_model)  
     st.session_state.ollama_initialized = True
 
 # Streamlit UI
@@ -21,8 +21,9 @@ st.set_page_config(
     layout="centered"
 )
 
+
 st.title("📚 Latex Writing Assistant")
-st.caption("Powered by Ollama (gemma3:270m)")
+st.caption("Powered by Ollama | "+used_model)
 
 tab1, tab2, tab3 = st.tabs(["BibTeX", "Text Improvement", "Markdown→LaTeX"])
 
@@ -50,7 +51,7 @@ with tab1:
         if citation_input.strip():
             with st.spinner("Generating BibTeX..."):
                 start_time = perf_counter()
-                bibtex_output = get_bibtex(citation_input)
+                bibtex_output = get_bibtex(citation_input, used_model)
                 st.session_state.last_inference_time = perf_counter() - start_time
             
             if bibtex_output:
@@ -82,7 +83,7 @@ with tab2:
         if text_input.strip():
             with st.spinner("Enhancing text..."):
                 start_time = perf_counter()
-                improved_text = improve_scientific_text(text_input)
+                improved_text = improve_scientific_text(text_input, used_model)
                 st.session_state.last_inference_time = perf_counter() - start_time
 
             if improved_text:
@@ -134,7 +135,7 @@ with tab3:
                 start_time = perf_counter()
                 latex_output = markdown_to_latex(md_input)
                 if use_ai:
-                    latex_output = get_enhanced_latex(latex_output) # Modified function
+                    latex_output = get_enhanced_latex(latex_output, used_model) # Modified function
                 st.session_state.last_conv_time = perf_counter() - start_time
             st.session_state.latex_output = latex_output
                 

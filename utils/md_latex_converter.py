@@ -115,7 +115,7 @@ def markdown_to_latex(markdown_text: str) -> str:
     return latex_text
 
 
-def get_enhanced_latex(markdown_text: str) -> str:
+def get_enhanced_latex(markdown_text: str, model_name = 'gemma3:1b') -> str:
     """
     Use Ollama to convert Markdown to high-quality LaTeX with context awareness
     """
@@ -146,7 +146,7 @@ def get_enhanced_latex(markdown_text: str) -> str:
     
     try:
         response = ollama.generate(
-            model='gemma3:1b',
+            model=model_name,
             system=system_prompt,
             prompt=f"Convert this Markdown to LaTeX:\n\n{markdown_text}",
             options={

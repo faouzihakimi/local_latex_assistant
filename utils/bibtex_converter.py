@@ -13,11 +13,11 @@ def extract_section(text):
     except ValueError:
         return "Required symbols not found"
 
-def get_bibtex(citation):
+def get_bibtex(citation, model_name = 'gemma3:1b'):
 
     try:
         response = ollama.generate(
-            model='gemma3:1b',
+            model=model_name,
             system= """
             You are an academic assistant that converts citations to precise BibTeX entries. 
             Only output the BibTeX entry, no explanations.

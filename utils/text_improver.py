@@ -2,7 +2,7 @@ import ollama
 import streamlit as st
 
 # New function for scientific text improvement
-def improve_scientific_text(text):
+def improve_scientific_text(text, model_name = 'gemma3:1b'):
     system_prompt = """
     You are a scientific writing specialist. Enhance text for academic publication with these guidelines:
 
@@ -54,7 +54,7 @@ def improve_scientific_text(text):
     
     try:
         response = ollama.generate(
-            model='gemma3:1b',
+            model=model_name,
             system=system_prompt,
             prompt=f"Improve this scientific text:\n\n{text}",
             options={
