@@ -8,7 +8,7 @@ from utils.bibtex_converter import *
 from utils.md_latex_converter import *
 from utils.text_improver import *
 
-used_model = 'gemma3:1b'
+used_model = 'gemma3:4b'
 #Initialize session state variables
 if "ollama_initialized" not in st.session_state:
     ollama.pull(used_model)  
